@@ -1,5 +1,6 @@
 .DS_Store
 vector_cache.pkl
+*.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

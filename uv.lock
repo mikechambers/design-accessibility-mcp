@@ -187,7 +187,7 @@ wheels = [
 
 [[package]]
 name = "design-accessibility-mcp"
-version = "0.85.2"
+version = "0.85.3"
 source = { editable = "." }
 dependencies = [
     { name = "fastmcp" },
