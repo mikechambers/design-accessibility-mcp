@@ -13,7 +13,7 @@ This MCP server enables AI systems to:
 
 ## Modules
 
-**accessibility_mcp**: MCP server exposing three core accessibility tools:
+**design_accessibility_mcp**: MCP server exposing three core accessibility tools:
 - `review_image` - Analyzes images for accessibility compliance and issues
 - `review_and_edit_image` - Provides analysis and generates improved image examples
 - `accessibility_query` - Answers questions about accessibility standards and practices
@@ -58,12 +58,12 @@ To install the MCP server in Claude Desktop, add the following to the `claude_de
  "args": [
    "run",
    "--env-file",
-   "/Users/ACCOUNT_NAME/src/accessibility-mcp/.env",
+   "/Users/ACCOUNT_NAME/src/design-accessibility-mcp/.env",
    "--directory",
-   "/Users/ACCOUNT_NAME/src/accessibility-mcp",
+   "/Users/ACCOUNT_NAME/src/design-accessibility-mcp",
    "python",
    "-m",
-   "accessibility_mcp.mcp_server"
+   "design_accessibility_mcp.mcp_server"
  ]
 }
 ```
@@ -82,7 +82,7 @@ The MCP server runs automatically when configured in Claude Desktop. Once instal
 
 (as a tip, to set up a project with 
 
-### accessibility_mcp
+### design_accessibility_mcp
 
 The MCP server runs automatically when configured in Claude Desktop. Once installed, you can use the three accessibility tools directly in your Claude conversations:
 
