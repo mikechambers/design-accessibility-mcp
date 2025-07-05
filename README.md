@@ -34,6 +34,7 @@ Clone or download the project, then from the root directory run:
 ```bash
 uv pip install -e .
 uv sync
+```
 
 ### Save OpenAI API Key
 
