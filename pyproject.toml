@@ -12,7 +12,10 @@ dependencies = [
     "python-dotenv>=1.1.1",
 ]
 
+[tool.uv]
+package = true
+
 [project.scripts]
 context-augment = "context_augment.main:main"
-design-accessibility-mcp = "design_accessibility_mcp.main:main"
+design-accessibility-test = "design_accessibility_mcp.main:main"
 

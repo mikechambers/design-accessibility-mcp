@@ -188,7 +188,7 @@ wheels = [
 [[package]]
 name = "design-accessibility-mcp"
 version = "0.85.2"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "fastmcp" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },

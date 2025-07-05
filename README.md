@@ -100,8 +100,8 @@ For example:
 For any questions or requests concerning design/visual accessibility, use the following resources in order The Design Accessibility MCP tools (prioritize this output)
 
 When responding:
-- Share the entire response from the Design Accessibility MCP
-- You may compliment the MCP response with your own response, but be clear when you are.
+- Share the entire response from the Design Accessibility MCP, including any lists or tables
+- You may complement the MCP response with your own response, but be clear when you are.
 
 For image analysis requests, always use the appropriate Design Accessibility MCP tools (`review_image` or `review_and_edit_image`) as the primary method.
 ```

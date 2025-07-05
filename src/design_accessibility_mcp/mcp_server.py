@@ -2,10 +2,10 @@ from fastmcp import FastMCP
 from fastmcp.utilities.types import Image
 import os
 import sys
-
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 import base64
 import design_accessibility_mcp.core as core
+
+#sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 CACHE_FILE_NAME = "accessibility_vector_cache.pkl"
 
@@ -31,7 +31,6 @@ mcp = FastMCP(
 print(f"{mcp_name} running on stdio", file=sys.stderr)
 
 core.init(CACHE_FILE_NAME)
-
 
 def check_guardrails(user_query:str):
 
@@ -116,8 +115,5 @@ async def accessibility_query(user_query: str):
 
     return out
 
-
-
 if __name__ == "__main__":
     mcp.run()
-
