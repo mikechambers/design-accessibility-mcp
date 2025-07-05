@@ -5,11 +5,9 @@ from openai import OpenAI
 
 CHUNK_TOKEN_SIZE = 200
 EMBEDDING_MODEL = "text-embedding-3-small"
-MIN_SIMILARITY = 0.7
-
+MIN_SIMILARITY = 0.60
 
 client = OpenAI()
-
 
 def chunk_text(text, max_tokens=CHUNK_TOKEN_SIZE):
     words = text.split()
@@ -20,8 +18,6 @@ def embed_documents(docs, batch_size=100):
     all_chunks = []
     chunks_to_embed = []
     chunk_metadata = []
-
-    print(f"Processing {len(docs)} documents...")
     
     # Collect all chunks first
     for doc in docs:
@@ -64,11 +60,10 @@ def embed_documents(docs, batch_size=100):
 def cosine_similarity(vec1, vec2):
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
 
-def retrieve_relevant_chunks(all_chunks, query, k=3):
+def retrieve_relevant_chunks(all_chunks, query, k=5):
 
     if not all_chunks:
         return []
-
 
     query_embedding = client.embeddings.create(
         model=EMBEDDING_MODEL,
@@ -79,9 +74,11 @@ def retrieve_relevant_chunks(all_chunks, query, k=3):
     for chunk in all_chunks:
         sim = cosine_similarity(query_embedding, chunk["embedding"])
 
+        
         if sim >= MIN_SIMILARITY:
             scored.append((sim, chunk))
 
+    print(f"found : {len(scored)}")
     top_matches = sorted(scored, key=lambda x: x[0], reverse=True)[:k]
 
     return [chunk["text"] for _, chunk in top_matches]

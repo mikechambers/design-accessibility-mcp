@@ -49,7 +49,7 @@ async def create_image_reference(path:str):
 
 def build_instructions(user_query:str) -> str:
 
-    relevant_chunks = context_augment.retrieve_relevant_chunks(context_data, user_query, k=3)
+    relevant_chunks = context_augment.retrieve_relevant_chunks(context_data, user_query, k=5)
     context = "\n\n".join(relevant_chunks)
 
     result = instructions_template.format(user_instructions=user_query, context=context)

@@ -46,7 +46,7 @@ OPENAI_API_KEY="sk-proj-aKwMn39h0..."
 
 ### Download Context Embeddings Cache
 
-Download the _accessibility_vector_cache.pkl_ file from the [releases page](https://github.com/mikechambers/design-accessibility-mcp/releases/tag/v0.85.2), and place the pkl file in the _src/design_accessibility_mcp_ directory.
+Download the _accessibility_vector_cache.pkl_ file from the [releases page](https://github.com/mikechambers/design-accessibility-mcp/releases/tag/v0.85.3), and place the pkl file in the _src/design_accessibility_mcp_ directory.
 
 This vector cache includes additional content and information on design accessibility topics, standards and guidelines. You can create your own vector cache with the _context_augment_ script.
 
