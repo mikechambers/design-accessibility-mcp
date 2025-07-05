@@ -16,25 +16,50 @@ def chunk_text(text, max_tokens=CHUNK_TOKEN_SIZE):
     for i in range(0, len(words), max_tokens):
         yield " ".join(words[i:i + max_tokens])
 
-def embed_documents(docs):
+def embed_documents(docs, batch_size=100):
     all_chunks = []
+    chunks_to_embed = []
+    chunk_metadata = []
 
+    print(f"Processing {len(docs)} documents...")
+    
+    # Collect all chunks first
     for doc in docs:
         for chunk in chunk_text(doc["text"]):
+            if chunk.strip():  # Skip empty chunks
+                chunks_to_embed.append(chunk)
+                chunk_metadata.append({"id": doc["id"], "text": chunk})
+
+    print(f"Found {len(chunks_to_embed)} chunks to embed...")
+
+    # Process in batches
+    for i in range(0, len(chunks_to_embed), batch_size):
+        batch = chunks_to_embed[i:i + batch_size]
+        batch_metadata = chunk_metadata[i:i + batch_size]
+        
+        try:
+            print(f"Embedding batch {i//batch_size + 1}/{(len(chunks_to_embed) + batch_size - 1)//batch_size}...")
+            
             embedding_response = client.embeddings.create(
                 model=EMBEDDING_MODEL,
-                input=chunk
+                input=batch
             )
-            vector = embedding_response.data[0].embedding
+            
+            for j, embedding_data in enumerate(embedding_response.data):
+                metadata = batch_metadata[j]
+                all_chunks.append({
+                    "id": metadata["id"],
+                    "text": metadata["text"],
+                    "embedding": embedding_data.embedding
+                })
+                
+        except Exception as e:
+            print(f"Error embedding batch {i//batch_size + 1}: {e}")
+            print("Continuing with next batch...")
+            continue
 
-            all_chunks.append({
-                "id": doc["id"],
-                "text": chunk,
-                "embedding": vector
-            })
-
+    print(f"Successfully embedded {len(all_chunks)} chunks")
     return all_chunks
-
 
 def cosine_similarity(vec1, vec2):
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
