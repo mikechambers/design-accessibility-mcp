@@ -72,18 +72,6 @@ To install the MCP server in Claude Desktop, add the following to the `claude_de
 
 ## Usage
 
-add a mention of that to this:
-
-### accessibility_mcp
-
-The MCP server runs automatically when configured in Claude Desktop. Once installed, you can use the three accessibility tools directly in your Claude conversations:
-
-- **`review_image`** - Analyze images for accessibility compliance
-- **`review_and_edit_image`** - Get analysis plus an improved version of the image
-- **`accessibility_query`** - Ask questions about accessibility best practices and standards
-
-(as a tip, to set up a project with 
-
 ### design_accessibility_mcp
 
 The MCP server runs automatically when configured in Claude Desktop. Once installed, you can use the three accessibility tools directly in your Claude conversations:
@@ -114,7 +102,7 @@ Generate embeddings from your accessibility documentation to enhance the MCP ser
 uv run context-augment --docs-dir /path/to/your/docs --output-file /path/to/vector_cache.pkl
 ```
 
-Documents must be Markdown (.md), HTML (.html), or TXT (.txt) files, although structured markdown files are recommended.
+Documents must be Markdown (.md), HTML (.html), or TXT (.txt) files. Structured markdown files recommended.
 
 **Parameters:**
 - `--docs-dir` - Directory containing supported files to process
@@ -122,7 +110,7 @@ Documents must be Markdown (.md), HTML (.html), or TXT (.txt) files, although st
 
 **Example:**
 ```bash
-uv run context-augment --docs-dir ./accessibility-docs --output-file ./cache/vector_cache.pkl
+uv run context-augment --docs-dir ./accessibility-docs --output-file ./cache/accessibility_vector_cache.pkl
 ```
 
 This processes all the supported files in the specified directory, creates embeddings, and saves them to the specified cache file that the MCP server can use to provide more relevant and comprehensive responses based on your custom documentation.
