@@ -1,5 +1,5 @@
 import os
 
-CACHE_FILE_NAME = "embeddings_cache.pkl"
+CACHE_FILE_NAME = "vector_cache.pkl"
 
 

@@ -7,11 +7,13 @@ import context_augment.core as core
 import pickle
 from shared.consts import CACHE_FILE_NAME
 
+supported_extensions = [".md", ".markdown", ".html", ".txt"]
+
 def load_documents(docs_path:str):
     docs = []
 
     for filename in os.listdir(docs_path):
-        if filename.endswith(".md"):
+        if any(filename.endswith(ext) for ext in supported_extensions):
             filepath = os.path.join(docs_path, filename)
             with open(filepath, "r", encoding="utf-8") as f:
                 text = f.read()

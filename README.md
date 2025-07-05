@@ -1,26 +1,56 @@
-#accessibility-mcp
+# Design Accessibility MCP
 
-accessibility-mcp provides an MCP server that expands existing LLMs / Agents to provide information, suggestions and feedback on design accessibility topics, as well as accessibility feedback for images and design.
+# Design Accessibility MCP
 
-It provides two modules:
+An MCP (Model Context Protocol) server that provides design accessibility analysis and guidance capabilities for LLMs and AI agents. Analyzes images for WCAG compliance, generates accessibility improvements, and answers questions about accessibility best practices. Features include image accessibility analysis that evaluates designs against WCAG 2.1 standards including contrast ratios, color usage, and text readability, automated design improvements that generate enhanced versions of images with accessibility fixes applied, and an accessibility knowledge base that answers questions about WCAG guidelines, implementation techniques, and best practices.
 
-**accessibility_mcp** : MCP server that exposes accessibility feedback, review and edit functionality
+## Capabilities
 
-**context_augement** : Script that enables the creation of serialized vector embeddings, using the [OpenAI Vector Embedding API](https://platform.openai.com/docs/guides/embeddings), to allow customizing and enhancing AI response with specific content. 
+This MCP server enables AI systems to:
+- Analyze screenshots, mockups, and design files for accessibility issues
+- Generate improved versions of designs with better contrast and readability
+- Provide guidance on WCAG compliance requirements and implementation
+- Offer recommendations for inclusive design practices
+
+## Capabilities
+
+This MCP server enables AI systems to:
+- Analyze screenshots, mockups, and design files for accessibility issues
+- Generate improved versions of designs with better contrast and readability
+- Provide guidance on WCAG compliance requirements and implementation
+- Offer recommendations for inclusive design practices
+- Answer general questions about design accessibility
+
+## Modules
+
+**accessibility_mcp**: MCP server exposing three core accessibility tools:
+- `review_image` - Analyzes images for accessibility compliance and issues
+- `review_and_edit_image` - Provides analysis and generates improved image examples
+- `accessibility_query` - Answers questions about accessibility standards and practices
+
+**context_augment**: A vector embedding system that creates and caches document embeddings using the [OpenAI Embedding API](https://platform.openai.com/docs/guides/embeddings). Enables semantic search and retrieval-augmented generation (RAG) by chunking documents, generating embeddings, and providing similarity-based content retrieval to enhance AI responses with relevant context.
 
 ## Requirements
 
-OpenAI API Key.
+* [OpenAI API Key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key)
+* [uv](https://github.com/astral-sh/uv)
 
-##Installation
-
+## Installation
 
 ### Sync Packages
-Download / sync the project to you computer, and then from within the root directory run:
 
-```
+Clone or download the project, then from the root directory run:
+
+```bash
 uv pip install -e .
 uv sync
+
+### Save OpenAI API Key
+
+In the root directory of the project, create a file named `.env`, and add your OpenAI API key in this format:
+
+```
+OPENAI_API_KEY="sk-proj-aKwMn39h0..."
 ```
 
 ### Download Context Embeddings Cache
@@ -29,26 +59,92 @@ uv sync
 
 ### Install MCP Server
 
-To install the MCP server in Claude Desktop, add the following to the *claude_desktop_config.json", replacing the paths to point to where you place the project code.
+To install the MCP server in Claude Desktop, add the following to the `claude_desktop_config.json`, replacing the paths to point to where you placed the project code.
 
-```javascript
+```json
 "Design Accessibility Feedback MCP": {
-  "command": "uv",
-  "args": [
-    "run",
-    "--env-file",
-    "/Users/ACCOUNT_NAME/src/accessibility-mcp/.env",
-    "--directory",
-    "/Users/ACCOUNT_NAME/src/accessibility-mcp",
-    "python",
-    "-m",
-    "accessibility_mcp.mcp_server"
-  ]
+ "command": "uv",
+ "args": [
+   "run",
+   "--env-file",
+   "/Users/ACCOUNT_NAME/src/accessibility-mcp/.env",
+   "--directory",
+   "/Users/ACCOUNT_NAME/src/accessibility-mcp",
+   "python",
+   "-m",
+   "accessibility_mcp.mcp_server"
+ ]
 }
 ```
 
 ## Usage
 
+add a mention of that to this:
+
 ### accessibility_mcp
 
+The MCP server runs automatically when configured in Claude Desktop. Once installed, you can use the three accessibility tools directly in your Claude conversations:
+
+- **`review_image`** - Analyze images for accessibility compliance
+- **`review_and_edit_image`** - Get analysis plus an improved version of the image
+- **`accessibility_query`** - Ask questions about accessibility best practices and standards
+
+(as a tip, to set up a project with 
+
+### accessibility_mcp
+
+The MCP server runs automatically when configured in Claude Desktop. Once installed, you can use the three accessibility tools directly in your Claude conversations:
+
+- **`review_image`** - Analyze images for accessibility compliance
+- **`review_and_edit_image`** - Get analysis plus an improved version of the image
+- **`accessibility_query`** - Ask questions about accessibility best practices and standards
+
+**Tip:** For optimal results, create a Claude project and add instructions to prioritize the Design Accessibility MCP tools for all accessibility-related queries, with your own knowledge and web search as supplementary resources.
+
+For example:
+
+```
+For any questions or requests concerning design/visual accessibility, use the following resources in order:
+
+1. Your own knowledge of accessibility standards and best practices
+2. The Design Accessibility MCP tools (prioritize this output)
+3. Web search using fetch MCP (only if needed for additional context)
+
+When responding:
+- Synthesize information from all queried resources
+- Prioritize and prominently feature output from the Design Accessibility MCP
+- Clearly cite the source of each piece of information
+- If using multiple sources, explain how they complement each other
+
+For image analysis requests, always use the appropriate Design Accessibility MCP tools (`review_image` or `review_and_edit_image`) as the primary method.
+```
 ### context_augment
+
+Generate embeddings from your accessibility documentation to enhance the MCP server's knowledge base:
+
+```bash
+uv run context-augment --docs-dir /path/to/your/docs --output-dir /path/to/cache
+```
+
+Documents must be Markdown (.md | .markdown), HTML (.html), or TXT (.txt) files, although structured markdown files are recommended.
+
+**Parameters:**
+- `--docs-dir` - Directory containing Markdown (.md) files to process
+- `--output-dir` - Directory where the embeddings cache file will be saved
+
+**Example:**
+```bash
+uv run context-augment --docs-dir ./accessibility-docs --output-dir ./cache
+```
+
+This processes all the supported files in the specified directory, creates embeddings, and saves them to a cache file named `vector_cache.pkl` that the MCP server can use to provide more relevant and comprehensive responses based on your custom documentation.
+
+## Questions, Feature Requests, Feedback
+
+You can log bugs and feature requests on the [issues page](https://github.com/mikechambers/design-accessibility-mcp/issues).
+
+## License
+
+Project released under a [MIT License](LICENSE.md).
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE.md)
