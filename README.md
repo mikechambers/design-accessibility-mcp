@@ -1,16 +1,6 @@
 # Design Accessibility MCP
 
-# Design Accessibility MCP
-
-An MCP (Model Context Protocol) server that provides design accessibility analysis and guidance capabilities for LLMs and AI agents. Analyzes images for WCAG compliance, generates accessibility improvements, and answers questions about accessibility best practices. Features include image accessibility analysis that evaluates designs against WCAG 2.1 standards including contrast ratios, color usage, and text readability, automated design improvements that generate enhanced versions of images with accessibility fixes applied, and an accessibility knowledge base that answers questions about WCAG guidelines, implementation techniques, and best practices.
-
-## Capabilities
-
-This MCP server enables AI systems to:
-- Analyze screenshots, mockups, and design files for accessibility issues
-- Generate improved versions of designs with better contrast and readability
-- Provide guidance on WCAG compliance requirements and implementation
-- Offer recommendations for inclusive design practices
+An MCP (Model Context Protocol) server that provides design accessibility analysis and guidance capabilities for LLMs and AI agents. Analyzes images for WCAG compliance, generates accessibility improvements, and answers questions about accessibility best practices. 
 
 ## Capabilities
 
