@@ -19,6 +19,11 @@ async def async_main():
         print("off topic")
         return
     
+    #out = await core.review_and_edit_image("review this design for accessibility issues and create a new edit with your suggested changes", "/Users/mesh/Desktop/mcpfiles/photoshop/psd-contrast/alpine_adventures_org.png")
+
+    #data = out["image"]["data"]
+    #core.write_base64_file(data, "output.jpg")
+    
     print(out)
 
 def main():

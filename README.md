@@ -46,7 +46,9 @@ OPENAI_API_KEY="sk-proj-aKwMn39h0..."
 
 ### Download Context Embeddings Cache
 
+Download the _accessibility_vector_cache.pkl_ file from the [releases page](), and place the pkl file in the _src/design_accessibility_mcp_ directory.
 
+This vector cache includes additional content and information on design accessibility topics, standards and guidelines. You can create your own vector cache with the _context_augment_ script.
 
 ### Install MCP Server
 
@@ -54,17 +56,17 @@ To install the MCP server in Claude Desktop, add the following to the `claude_de
 
 ```json
 "Design Accessibility Feedback MCP": {
- "command": "uv",
- "args": [
-   "run",
-   "--env-file",
-   "/Users/ACCOUNT_NAME/src/design-accessibility-mcp/.env",
-   "--directory",
-   "/Users/ACCOUNT_NAME/src/design-accessibility-mcp",
-   "python",
-   "-m",
-   "design_accessibility_mcp.mcp_server"
- ]
+  "command": "uv",
+  "args": [
+    "run",
+    "--env-file",
+    "/Users/mesh/src/design-accessibility-mcp/.env",
+    "--directory",
+    "/Users/mesh/src/design-accessibility-mcp",
+    "python",
+    "-m",
+    "design_accessibility_mcp.mcp_server"
+  ]
 }
 ```
 
@@ -95,40 +97,35 @@ The MCP server runs automatically when configured in Claude Desktop. Once instal
 For example:
 
 ```
-For any questions or requests concerning design/visual accessibility, use the following resources in order:
-
-1. Your own knowledge of accessibility standards and best practices
-2. The Design Accessibility MCP tools (prioritize this output)
-3. Web search using fetch MCP (only if needed for additional context)
+For any questions or requests concerning design/visual accessibility, use the following resources in order The Design Accessibility MCP tools (prioritize this output)
 
 When responding:
-- Synthesize information from all queried resources
-- Prioritize and prominently feature output from the Design Accessibility MCP
-- Clearly cite the source of each piece of information
-- If using multiple sources, explain how they complement each other
+- Share the entire response from the Design Accessibility MCP
+- You may compliment the MCP response with your own response, but be clear when you are.
 
 For image analysis requests, always use the appropriate Design Accessibility MCP tools (`review_image` or `review_and_edit_image`) as the primary method.
 ```
+
 ### context_augment
 
 Generate embeddings from your accessibility documentation to enhance the MCP server's knowledge base:
 
 ```bash
-uv run context-augment --docs-dir /path/to/your/docs --output-dir /path/to/cache
+uv run context-augment --docs-dir /path/to/your/docs --output-file /path/to/vector_cache.pkl
 ```
 
-Documents must be Markdown (.md | .markdown), HTML (.html), or TXT (.txt) files, although structured markdown files are recommended.
+Documents must be Markdown (.md), HTML (.html), or TXT (.txt) files, although structured markdown files are recommended.
 
 **Parameters:**
-- `--docs-dir` - Directory containing Markdown (.md) files to process
-- `--output-dir` - Directory where the embeddings cache file will be saved
+- `--docs-dir` - Directory containing supported files to process
+- `--output-file` - File path where the embeddings cache will be saved
 
 **Example:**
 ```bash
-uv run context-augment --docs-dir ./accessibility-docs --output-dir ./cache
+uv run context-augment --docs-dir ./accessibility-docs --output-file ./cache/vector_cache.pkl
 ```
 
-This processes all the supported files in the specified directory, creates embeddings, and saves them to a cache file named `vector_cache.pkl` that the MCP server can use to provide more relevant and comprehensive responses based on your custom documentation.
+This processes all the supported files in the specified directory, creates embeddings, and saves them to the specified cache file that the MCP server can use to provide more relevant and comprehensive responses based on your custom documentation.
 
 ## Questions, Feature Requests, Feedback
 

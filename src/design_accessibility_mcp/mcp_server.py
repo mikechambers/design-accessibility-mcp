@@ -66,7 +66,7 @@ async def review_image(user_query: str, file_path: str):
 
 
 @mcp.tool()
-async def review_and_edit_image(user_query: str, file_path: str) -> list:
+async def review_and_edit_image(user_query: str, file_path: str):
     """
     Analyzes an image for accessibility compliance and design issues.
     
@@ -86,10 +86,12 @@ async def review_and_edit_image(user_query: str, file_path: str) -> list:
 
     data = response["image"]["data"]
 
+    #core.write_base64_file(data, "/Users/mesh/tmp/output.jpg")
     image_bytes = base64.b64decode(data)
+
     image = Image(data=image_bytes, format="jpeg")
 
-    return [response, image]
+    return [response["response"], image]
 
 
 @mcp.tool()
@@ -114,4 +116,8 @@ async def accessibility_query(user_query: str):
 
     return out
 
-mcp.run()
+
+
+if __name__ == "__main__":
+    mcp.run()
+
