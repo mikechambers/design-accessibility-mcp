@@ -1,6 +1,6 @@
 [project]
 name = "design-accessibility-mcp"
-version = "0.85.2"
+version = "0.85.3"
 description = "Design accessibility analysis MCP server"
 readme = "README.md"
 requires-python = ">=3.10"
