@@ -2,7 +2,7 @@
 
 An MCP (Model Context Protocol) server that provides design accessibility analysis and guidance capabilities for LLMs and AI agents. Analyzes images for WCAG compliance, generates accessibility improvements, and answers questions about accessibility best practices. 
 
-[Video Examples](https://www.youtube.com/watch?v=ZyFAkixXkvk&list=PLrZcuHfRluqt5JQiKzMWefUb0Xumb7MkI&index=12)
+[Video Example](https://www.youtube.com/watch?v=ZyFAkixXkvk&list=PLrZcuHfRluqt5JQiKzMWefUb0Xumb7MkI&index=12)
 
 ## Capabilities
 
